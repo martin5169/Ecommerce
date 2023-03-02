@@ -1,11 +1,13 @@
 import React from "react";
-import { Card, Button, Form, Row, Col } from "react-bootstrap";
+import { Card, Form, Row, Col } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
-import { useContext } from "react";
+import { useContext,useState} from "react";
+import Button from 'react-bootstrap/Button';
 
 function ProductCard({ product }) {
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.id);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <Card>
@@ -45,14 +47,26 @@ function ProductCard({ product }) {
             </Button>
           </>
         ) : (
-          <Button
+            <Button
             variant="primary"
             onClick={() => cart.addOneToCart(product.id)}
           >
             Agregar al carrito
           </Button>
-        )}
+        )
+        }
+      
       </Card.Body>
+      <Button variant="light" onClick={() => {
+        setExpanded(!expanded)}
+        
+      }>Ver Detalles</Button>
+          {expanded && (
+            <div>
+              {product.data}
+             
+            </div>
+          )}
     </Card>
   );
 }

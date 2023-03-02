@@ -15,6 +15,13 @@ export function CartContextProvider(props) {
     return quantity;
   }
 
+  function getDetails(id){
+    console.log(id)
+    return (
+        <div>Hola</div>
+    )
+  }
+
   function addOneToCart(id) {
     const quantity = getProductQuantity(id);
     // product is not in cart
@@ -76,6 +83,7 @@ export function CartContextProvider(props) {
         removeOneFromCart,
         deleteFromCart,
         getTotalCost,
+        getDetails,
       }}
     >
       {props.children}
